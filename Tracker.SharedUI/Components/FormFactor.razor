@@ -1,0 +1,9 @@
+﻿@using Tracker.Core.Interfaces
+@inject IFormFactor FormFactorService
+
+Welcome to your new app running on <em>@factor</em> using <em>@platform</em>.
+
+@code {
+    private string factor => FormFactorService.GetFormFactor();
+    private string platform => FormFactorService.GetPlatform();
+}

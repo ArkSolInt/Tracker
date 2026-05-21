@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
+using Tracker.Core.Interfaces;
+using Tracker.Services.Interfaces;
 
 namespace Tracker.App;
 
@@ -43,7 +45,12 @@ public static class MauiProgram
 		builder.Services.AddLogging(configure => configure.AddDebug());
 #endif
 
-		builder.Services.AddSingleton<ProjectRepository>();
+        // Add device-specific services 
+        builder.Services.AddSingleton<IFormFactor, FormFactorService>();
+        builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+        // Add app services
+        builder.Services.AddSingleton<ProjectRepository>();
 		builder.Services.AddSingleton<TaskRepository>();
 		builder.Services.AddSingleton<CategoryRepository>();
 		builder.Services.AddSingleton<TagRepository>();

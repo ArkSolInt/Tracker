@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tracker.ServiceDefaults\Tracker.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Tracker.Services\Tracker.Services.csproj" />
+    <ProjectReference Include="..\Tracker.SharedUI\Tracker.SharedUI.csproj" />
   </ItemGroup>
 
 </Project>

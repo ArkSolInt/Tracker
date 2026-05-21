@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Tracker.Core.Interfaces;
+using Tracker.Hyb.Services;
+using Tracker.Services.Interfaces;
 
 namespace Tracker.Hyb;
 
@@ -21,6 +24,11 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+        // Add device-specific services 
+        builder.Services.AddSingleton<IFormFactor, FormFactorService>();
+        builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+
+        return builder.Build();
 	}
 }

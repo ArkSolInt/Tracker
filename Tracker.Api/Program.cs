@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Tracker.Api.Components;
 using Tracker.Api.Components.Account;
 using Tracker.Api.Data;
+using Tracker.Api.Endpoints;
+using Tracker.Api.Services;
+using Tracker.Core.Interfaces;
+using Tracker.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +44,12 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
+
+// Add device-specific services 
+builder.Services.AddSingleton<IFormFactor, FormFactorService>();
+builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -66,5 +76,7 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+
+app.MapApiEndpoints();
 
 app.Run();
