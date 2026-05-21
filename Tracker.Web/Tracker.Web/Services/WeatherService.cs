@@ -14,15 +14,15 @@ public class WeatherService(ApiHttpClient http, ILogger<WeatherService> logger) 
     {
         try
         {
-            logger.LogInformation("HttpClient is properly initialized.");
+            //logger.LogInformation("ApiHttpClient is properly initialized.");
             var data = await http.GetWeatherForecastAsync();
 
             return data ?? [];
         }
         catch (HttpRequestException ex)
         {
-           // logger.LogError(ex, "Unable to load weather data from {WeatherUrl}.", options.Value.WeatherPath);
-            throw new InvalidOperationException("Unable to load weather data right now.", ex);
+           //logger.LogError(ex, "Unable to load weather data from {WeatherUrl}.", options.Value.WeatherPath);
+           throw new InvalidOperationException("Unable to load weather data right now.", ex);
         }
     }
 }
