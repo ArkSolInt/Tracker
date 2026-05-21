@@ -1,0 +1,22 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.3.5">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>e17ac807-8010-4889-adba-0447b4396f24</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tracker.Api\Tracker.Api.csproj" />
+    <ProjectReference Include="..\Tracker.App\Tracker.App.csproj">
+      <SetTargetFramework>TargetFramework=net10.0</SetTargetFramework>
+    </ProjectReference>
+    <ProjectReference Include="..\Tracker.Hyb\Tracker.Hyb.csproj">
+      <SetTargetFramework>TargetFramework=net10.0</SetTargetFramework>
+    </ProjectReference>
+    <ProjectReference Include="..\Tracker.Web\Tracker.Web\Tracker.Web.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "Tracker.AppHost/Tracker.AppHost.csproj"
+  }
+}

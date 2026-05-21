@@ -1,0 +1,16 @@
+<Solution>
+  <Project Path="Tracker.Api/Tracker.Api.csproj" />
+  <Project Path="Tracker.App/Tracker.App.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="Tracker.AppHost/Tracker.AppHost.csproj" Id="f5f8f285-454d-42c3-94b8-a7e5bd76eecd" />
+  <Project Path="Tracker.Core/Tracker.Core.csproj" Id="087fe064-0c27-4251-a63b-ff3d55143e52" />
+  <Project Path="Tracker.Hyb/Tracker.Hyb.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="Tracker.ServiceDefaults/Tracker.ServiceDefaults.csproj" />
+  <Project Path="Tracker.Services/Tracker.Services.csproj" Id="f1c4aadf-4e95-495e-bc00-2057ddfc5553" />
+  <Project Path="Tracker.SharedUI/Tracker.SharedUI.csproj" />
+  <Project Path="Tracker.Web/Tracker.Web.Client/Tracker.Web.Client.csproj" />
+  <Project Path="Tracker.Web/Tracker.Web/Tracker.Web.csproj" />
+</Solution>
