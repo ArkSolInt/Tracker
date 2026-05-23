@@ -9,22 +9,24 @@ using static System.Net.WebRequestMethods;
 
 namespace Tracker.Web.Client.Services;
 
-public class ClientWeatherService(ApiHttpClient http, ILogger<ClientWeatherService> logger) : IWeatherService
+public class ClientWeatherService(ApiHttpClient http, ILogger<ClientWeatherService> logger)
+    : IWeatherService
 {
     public async Task<WeatherForecast[]> GetWeatherForecastsAsync()
     {
-
         try
         {
-            logger.LogInformation("HttpClient is properly initialized.");
-            var data = await http.GetWeatherForecastAsync();
-
-            return data ?? [];
+            var forecasts = await http.GetWeatherForecastsAsync();
+            return forecasts ?? [];
         }
-        catch (HttpRequestException ex)
+        catch (Exception ex)
         {
-            //logger.LogError(ex, "Unable to load weather data from {WeatherUrl}.", options.Value.WeatherPath);
-            throw new InvalidOperationException("Unable to load weather data right now.", ex);
+            logger.LogError(ex, "Failed to load weather forecasts from ApiHttpClient.");
+
+            throw new InvalidOperationException(
+                "Unable to load weather information at the moment.",
+                ex);
         }
     }
+
 }

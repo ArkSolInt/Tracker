@@ -1,6 +1,9 @@
 ﻿@page "/weather"
+@using Microsoft.AspNetCore.Authorization
 @using Tracker.Core.Models
 @using Tracker.Services.Interfaces
+
+@attribute [Authorize]
 
 @inject IWeatherService WeatherService
 

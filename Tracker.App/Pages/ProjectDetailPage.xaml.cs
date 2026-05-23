@@ -2,7 +2,7 @@ using Tracker.App.Models;
 
 namespace Tracker.App.Pages;
 
-public partial class ProjectDetailPage : ContentPage
+public partial class ProjectDetailPage : ProtectedContentPage
 {
 	public ProjectDetailPage(ProjectDetailPageModel model)
 	{

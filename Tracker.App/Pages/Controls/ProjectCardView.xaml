@@ -13,7 +13,7 @@
         x:DataType="models:Project">
     <shimmer:SfShimmer
         BackgroundColor="Transparent"
-        IsActive="{Binding IsBusy, Source={RelativeSource AncestorType={x:Type pageModels:MainPageModel}}, x:DataType=pageModels:IProjectTaskPageModel}">
+        IsActive="{Binding IsBusy, Source={RelativeSource AncestorType={x:Type pageModels:ProjectDashboardPageModel}}, x:DataType=pageModels:IProjectTaskPageModel}">
         <shimmer:SfShimmer.CustomView>
             <VerticalStackLayout Spacing="15">
                 <BoxView 

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:ProtectedContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Tracker.App"
+             xmlns:pageModels="clr-namespace:Tracker.App.PageModels"             
+             xmlns:models="clr-namespace:Tracker.App.Models"
+             xmlns:controls="clr-namespace:Tracker.App.Pages.Controls"
+             xmlns:pullToRefresh="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Tracker.App.Pages.CounterPage"
+             x:DataType="pageModels:CounterPageModel"
+             x:Name="CounterPageName"
+             Title="Counter">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference CounterPageName}, x:DataType=ContentPage}"
+                EventName="NavigatedTo"
+                Command="{Binding NavigatedToCommand}" />
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference CounterPageName}, x:DataType=ContentPage}"
+                EventName="NavigatedFrom"
+                Command="{Binding NavigatedFromCommand}" />
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference CounterPageName}, x:DataType=ContentPage}"
+                EventName="Appearing"                
+                Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <pullToRefresh:SfPullToRefresh
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshCommand="{Binding RefreshCommand}">
+            <pullToRefresh:SfPullToRefresh.PullableContent>
+                <ScrollView>
+                    <Grid Padding="{StaticResource LayoutPadding}" RowSpacing="{StaticResource LayoutSpacing}">
+                        <HorizontalStackLayout VerticalOptions="StartAndExpand" Spacing="{StaticResource LayoutSpacing}">
+                            
+                            <Label 
+                                Text="Counter count: "
+                                VerticalOptions="Center" 
+                                HorizontalOptions="Center" />
+
+                            <Label 
+                                Text="{Binding CurrentCount}"
+                                VerticalOptions="Center" 
+                                HorizontalOptions="Center" />
+
+                        </HorizontalStackLayout>
+                    </Grid>
+                </ScrollView>
+            </pullToRefresh:SfPullToRefresh.PullableContent>
+        </pullToRefresh:SfPullToRefresh>
+
+        <controls:AddButton 
+            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+            Command="{Binding IncrementCountCommand}"
+            ToolTipProperties.Text="Increment Counter"
+            SemanticProperties.Description="Increment Counter" />
+    </Grid>
+</local:ProtectedContentPage>

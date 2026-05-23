@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ProtectedContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Tracker.App"
+             xmlns:pageModels="clr-namespace:Tracker.App.PageModels"   
+             xmlns:models="clr-namespace:Tracker.App.Models"
+             xmlns:coreModels="clr-namespace:Tracker.Core.Models;assembly=Tracker.Core"
+             xmlns:controls="clr-namespace:Tracker.App.Pages.Controls"
+             xmlns:pullToRefresh="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Tracker.App.Pages.WeatherPage"
+             x:DataType="pageModels:WeatherPageModel"
+             x:Name="WeatherPageName"
+             Title="Weather">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Path=BindingContext, Source={x:Reference WeatherPageName}, x:DataType=ContentPage}"
+            EventName="NavigatedTo"
+            Command="{Binding NavigatedToCommand}" />
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Path=BindingContext, Source={x:Reference WeatherPageName}, x:DataType=ContentPage}"
+            EventName="NavigatedFrom"
+            Command="{Binding NavigatedFromCommand}" />
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Path=BindingContext, Source={x:Reference WeatherPageName}, x:DataType=ContentPage}"
+            EventName="Appearing"                
+            Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+
+    <Grid>
+        <pullToRefresh:SfPullToRefresh
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshCommand="{Binding RefreshCommand}">
+            <pullToRefresh:SfPullToRefresh.PullableContent>
+                <ScrollView>
+                    <VerticalStackLayout Padding="{StaticResource LayoutPadding}" Spacing="{StaticResource LayoutSpacing}">
+                        <Label
+             Text="Weather"
+             Style="{StaticResource Headline}"
+             SemanticProperties.HeadingLevel="Level1" />
+
+                        <Label
+             Text="This component demonstrates showing data."
+             Style="{StaticResource SubHeadline}"
+             SemanticProperties.HeadingLevel="Level2" />
+
+                        <Label
+             x:Name="StatusLabel"
+             IsVisible="False" />
+
+                        <Label IsVisible="{Binding IsBusy}"
+             x:Name="LoadingLabel"
+             Text="Loading..." />
+
+                        <Grid
+                            x:Name="WeatherHeader"
+                            IsVisible="True"
+                            ColumnDefinitions="*,*,*,*"
+                            ColumnSpacing="12">
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Date" />
+                            <Label Grid.Column="1" FontAttributes="Bold" Text="Temp. (C)" />
+                            <Label Grid.Column="2" FontAttributes="Bold" Text="Temp. (F)" />
+                            <Label Grid.Column="3" FontAttributes="Bold" Text="Summary" />
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding Forecasts}"
+             x:Name="WeatherCollectionView"
+             IsVisible="True">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="coreModels:WeatherForecast">
+                                    <Grid
+                                        Padding="0,8"
+                                        ColumnDefinitions="*,*,*,*"
+                                        ColumnSpacing="12">    
+                                        <Label Grid.Column="0" Text="{Binding Date}" />
+                                        <Label Grid.Column="1" Text="{Binding TemperatureC}" />
+                                        <Label Grid.Column="2" Text="{Binding TemperatureF}" />
+                                        <Label Grid.Column="3" Text="{Binding Summary}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </ScrollView>
+            </pullToRefresh:SfPullToRefresh.PullableContent>
+        </pullToRefresh:SfPullToRefresh>
+    </Grid>
+</local:ProtectedContentPage>

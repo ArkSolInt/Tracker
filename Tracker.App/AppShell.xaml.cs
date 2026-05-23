@@ -1,13 +1,17 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using Tracker.App.ViewModels;
 using Font = Microsoft.Maui.Font;
 namespace Tracker.App;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	private readonly AppShellViewModel model;
+
+	public AppShell(AppShellViewModel model)
 	{
 		InitializeComponent();
+		this.model = model;
 		var currentTheme = Application.Current!.RequestedTheme;		
 		ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
 	}
@@ -45,5 +49,20 @@ public partial class AppShell : Shell
 	private void SfSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
     {
 		Application.Current!.UserAppTheme = e.NewIndex == 0 ? AppTheme.Light : AppTheme.Dark;
+    }
+
+    public void RefreshMenu()
+    {
+        model.UpdateAuthState();
+    }
+
+	override protected void OnNavigated(ShellNavigatedEventArgs args)
+	{
+		base.OnNavigated(args);
+		if (args.Source == ShellNavigationSource.Pop)
+		{
+            RefreshMenu();
+        }
+
     }
 }

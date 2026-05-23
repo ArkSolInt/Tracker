@@ -17,7 +17,7 @@ public static class ApiEndpoints
         {
             var forecasts = await weatherService.GetWeatherForecastsAsync();
             return Results.Ok(forecasts);
-        });
+        }).RequireAuthorization();
 
         
 

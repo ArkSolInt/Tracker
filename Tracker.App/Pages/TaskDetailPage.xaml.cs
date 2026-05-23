@@ -1,6 +1,6 @@
 namespace Tracker.App.Pages;
 
-public partial class TaskDetailPage : ContentPage
+public partial class TaskDetailPage : ProtectedContentPage
 {
 	public TaskDetailPage(TaskDetailPageModel model)
 	{

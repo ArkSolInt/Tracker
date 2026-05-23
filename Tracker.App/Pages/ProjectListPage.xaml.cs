@@ -1,6 +1,6 @@
 namespace Tracker.App.Pages;
 
-public partial class ProjectListPage : ContentPage
+public partial class ProjectListPage : ProtectedContentPage
 {
 	public ProjectListPage(ProjectListPageModel model)
 	{
